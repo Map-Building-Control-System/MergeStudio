@@ -1,0 +1,12 @@
+{
+  "name": "MergeStudio.EditMode",
+  "references": [
+    "MergeStudio.Runtime"
+  ],
+  "optionalUnityReferences": [
+    "TestAssemblies"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ]
+}

@@ -1,0 +1,90 @@
+name: Build Android
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [develop]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    env:
+      UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+      UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+      UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+          fetch-depth: 0
+      - uses: actions/cache@v4
+        with:
+          path: Library
+          key: Library-${{ runner.os }}-Tests-${{ hashFiles('Packages/**', 'ProjectSettings/**') }}-${{ github.sha }}
+          restore-keys: Library-${{ runner.os }}-Tests-${{ hashFiles('Packages/**', 'ProjectSettings/**') }}-
+      - uses: game-ci/unity-test-runner@v4
+        with:
+          unityVersion: auto
+          testMode: all
+          artifactsPath: TestResults
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: tests-${{ github.job }}
+          path: TestResults
+          if-no-files-found: warn
+  build:
+    needs: tests
+    runs-on: ubuntu-latest
+    env:
+      UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+      UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+      UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+          fetch-depth: 0
+      - uses: actions/cache@v4
+        with:
+          path: Library
+          key: Library-${{ runner.os }}-Android-${{ hashFiles('Packages/**', 'ProjectSettings/**') }}-${{ github.sha }}
+          restore-keys: Library-${{ runner.os }}-Android-${{ hashFiles('Packages/**', 'ProjectSettings/**') }}-
+      - uses: game-ci/unity-builder@v4
+        with:
+          unityVersion: auto
+          targetPlatform: Android
+          buildName: MergeStudio
+          allowDirtyBuild: true
+          # buildAppBundle=true is also set by ProjectSetup. v4 uses androidExportType.
+          androidExportType: androidAppBundle
+      - name: Verify Android App Bundle
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          bundles = list(Path('build').rglob('*.aab'))
+          if not bundles:
+              raise SystemExit('Build did not produce an Android App Bundle')
+          for bundle in bundles:
+              with ZipFile(bundle) as archive:
+                  names = set(archive.namelist())
+                  required = {'BundleConfig.pb', 'base/manifest/AndroidManifest.xml'}
+                  if not required <= names:
+                      raise SystemExit(f'Invalid Android App Bundle: {bundle}')
+                  corrupt = archive.testzip()
+                  if corrupt:
+                      raise SystemExit(f'Corrupt entry in {bundle}: {corrupt}')
+              print(f'Verified {bundle} ({bundle.stat().st_size} bytes)')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Android-build
+          path: build/**/*.aab
+          if-no-files-found: error

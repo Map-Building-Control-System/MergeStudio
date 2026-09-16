@@ -1,0 +1,10 @@
+{
+  "name": "MergeStudio.PlayMode",
+  "references": [
+    "MergeStudio.Runtime"
+  ],
+  "optionalUnityReferences": [
+    "TestAssemblies"
+  ],
+  "includePlatforms": []
+}

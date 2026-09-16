@@ -1,0 +1,10 @@
+{
+  "name": "MergeStudio.Runtime",
+  "rootNamespace": "MergeStudio",
+  "references": [
+    "Unity.Addressables",
+    "Unity.ResourceManager",
+    "Unity.Localization",
+    "Unity.ugui"
+  ]
+}

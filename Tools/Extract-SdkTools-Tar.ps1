@@ -1,0 +1,1 @@
+$ErrorActionPreference='Stop'; $base="$env:APPDATA\UnityHub\downloads"; $sdk='D:\unity\6000.6.0f1\Editor\Data\PlaybackEngines\AndroidPlayer\SDK'; New-Item -ItemType Directory -Force -Path $sdk | Out-Null; tar -xf (Join-Path $base 'platform-tools_r36.0.0-win.zip') -C $sdk; Write-Output 'platform tools extracted.'

@@ -1,0 +1,145 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1001}
+  - component: {fileID: 1002}
+  m_Layer: 0
+  m_Name: SceneLoader
+  m_TagString: Untagged
+  m_IsActive: 1
+--- !u!4 &1001
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !u!114 &1002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b308d34d8569525e9118abec6418eb77, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  _request: {fileID: 11400000, guid: 32291e6e1dd155d4a06ef63f164d8de5, type: 2}
+--- !u!1 &1010
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1011}
+  - component: {fileID: 1012}
+  m_Layer: 0
+  m_Name: StudioUIController
+  m_TagString: Untagged
+  m_IsActive: 1
+--- !u!4 &1011
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1010}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !u!114 &1012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6bfb3b0e1715ce98c6cb34499229660, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  _menu: 0
+  _sceneRequest: {fileID: 11400000, guid: 32291e6e1dd155d4a06ef63f164d8de5, type: 2}
+  _boardChanged: {fileID: 11400000, guid: d5af1c229c00564a9afb7f2c79c522b2, type: 2}
+  _spawnRequest: {fileID: 11400000, guid: b2ed602019b45be692366b9085eac71d, type: 2}
+  _orderRequest: {fileID: 11400000, guid: 6f735c7fdc7b56e285456186371ddee1, type: 2}
+  _cellRequest: {fileID: 11400000, guid: 9b207f43660f51b9bed77b95e2c05679, type: 2}
+  _goldChanged: {fileID: 11400000, guid: 0ee5727b04b658fa81be3878aceb8419, type: 2}
+  _energyChanged: {fileID: 11400000, guid: c39131cf1ba25ec2b43f21ba56044c25, type: 2}
+--- !u!1 &1020
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1021}
+  - component: {fileID: 1022}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_IsActive: 1
+--- !u!4 &1021
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !u!114 &1022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9940a11e2e705d38a21b1afb8a9b0997, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  _economy: {fileID: 11400000, guid: 659f687774815197b3417b8fb6f587c8, type: 2}
+  _order: {fileID: 11400000, guid: 14dbcf37472f55dbb3821cf721272a89, type: 2}
+  _spawnRequest: {fileID: 11400000, guid: b2ed602019b45be692366b9085eac71d, type: 2}
+  _orderRequest: {fileID: 11400000, guid: 6f735c7fdc7b56e285456186371ddee1, type: 2}
+  _cellRequest: {fileID: 11400000, guid: 9b207f43660f51b9bed77b95e2c05679, type: 2}
+  _goldGained: {fileID: 11400000, guid: a6a7c90319365836abec29eab62f9ed8, type: 2}
+  _goldChanged: {fileID: 11400000, guid: 0ee5727b04b658fa81be3878aceb8419, type: 2}
+  _energyChanged: {fileID: 11400000, guid: c39131cf1ba25ec2b43f21ba56044c25, type: 2}
+  _boardChanged: {fileID: 11400000, guid: d5af1c229c00564a9afb7f2c79c522b2, type: 2}
+  _orderFulfilled: {fileID: 11400000, guid: 4aafbe59306a5d08acd15b91271b7c8d, type: 2}
+--- !u!1660057539 &9223372036854775807
+SceneRoots:
+  m_ObjectHideFlags: 0
+  m_Roots:
+  - {fileID: 1001}
+  - {fileID: 1011}
+  - {fileID: 1021}
