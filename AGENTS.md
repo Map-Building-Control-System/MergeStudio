@@ -1,32 +1,57 @@
-# MergeStudio development instructions
+# MergeStudio development instructions / geliştirme talimatları
 
-## Project
+## English
 
-MergeStudio is a Unity 6.6 mobile merge game. The required editor version is `6000.6.0f1`; Android development requires Android Build Support, SDK & NDK Tools, and OpenJDK.
+### Project
 
-This repository is also the MergeStudio Games game-project template. New games should be created with GitHub's **Use this template** action or `Tools/New-GameProject.ps1`; do not fork it for a new game.
+MergeStudio is a Unity 6.6 mobile merge game and the MergeStudio Games game-project template. The required editor is `6000.6.0f1`; Android development requires Android Build Support, SDK & NDK Tools, and OpenJDK. New games use GitHub's **Use this template** action or `Tools/New-GameProject.ps1`; do not fork the template.
 
-## First setup
+### First setup
 
-1. Install Unity Hub and Unity `6000.6.0f1` with Android Build Support, Android SDK & NDK Tools, and OpenJDK.
+1. Install Unity `6000.6.0f1` and the Android modules.
 2. Install Git LFS and run `git lfs install`.
-3. Clone the repository, open it from Unity Hub, and wait for the first import.
-4. Run `MergeStudio > Ensure Project Setup` once if generated Addressables or Localization assets are missing.
-5. Open `Assets/Scenes/Init.unity` and verify the Init → MainMenu → Game flow.
+3. Clone the repository, open it in Unity Hub, and wait for import.
+4. Run `MergeStudio > Ensure Project Setup` if generated assets are missing.
+5. Open `Assets/Scenes/Init.unity` and verify `Init → MainMenu → Game`.
 
-## Validation
+### Validation and working rules
 
-Run `python Tools/validate_repo.py` for the static repository audit. If the required editor is installed at the default path, run `powershell -ExecutionPolicy Bypass -File Tools/Test-Unity.ps1` for EditMode and PlayMode tests. Do not claim Unity tests passed unless the XML reports exist and show zero failures.
+Run `python Tools/validate_repo.py`. Run `powershell -ExecutionPolicy Bypass -File Tools/Test-Unity.ps1` only when the required Unity editor is installed. Never claim Unity tests passed without XML reports showing zero failures.
 
-## Working rules
+- Use `develop` for integration, `feature/<short-name>` for features, and `hotfix/<short-name>` for urgent fixes.
+- Keep visible Unity `.meta` files. Do not commit `Library`, `Temp`, builds, credentials, keystores, or secrets.
+- Use event channels for gameplay communication and keep scene UI decoupled from core systems.
+- Preserve save recovery behavior and explain every PR’s validation and limitations.
+- Update `ProjectSettings/ProjectVersion.txt`, `Packages/manifest.json`, and this file together when versions change.
 
-- Use `develop` for integration. Create `feature/<short-name>` branches for work and `hotfix/<short-name>` for urgent fixes.
-- Keep Unity text serialization and visible `.meta` files. Do not commit `Library`, `Temp`, build outputs, credentials, keystores, or generated secrets.
-- Gameplay communication uses event channels; keep scene UI decoupled from core systems.
-- Persistence changes must preserve recovery behavior and must not expose secrets.
-- Every PR must explain behavior changed, validation run, and any Unity/editor limitation.
-- Before changing package or editor versions, update `ProjectSettings/ProjectVersion.txt`, `Packages/manifest.json`, and this file together.
+### AI-assisted development
 
-## AI-assisted development
+Codex, Claude, and other agents must read this file, `README.md`, `CONTRIBUTING.md`, `Docs/ARCHITECTURE.md`, and `Docs/CODING_STANDARDS.md` before editing. They must inspect existing code, make reviewable changes, run the static audit, and report checks they could not run.
 
-Codex, Claude, and other agents should read this file, `README.md`, `Docs/ARCHITECTURE.md`, and `Docs/CODING_STANDARDS.md` before editing. They should inspect existing code before adding new systems, make small reviewable commits, run the static audit after changes, and report any validation they could not run. Never invent Unity test results or production readiness.
+## Türkçe
+
+### Proje
+
+MergeStudio, Unity 6.6 ile geliştirilen mobil merge oyunudur ve MergeStudio Games oyun proje şablonudur. Gerekli Editor `6000.6.0f1`; Android için Android Build Support, SDK & NDK Tools ve OpenJDK gerekir. Yeni oyunları fork etmeyin; GitHub’da **Use this template** veya `Tools/New-GameProject.ps1` kullanın.
+
+### İlk kurulum
+
+1. Unity `6000.6.0f1` ve Android modüllerini kurun.
+2. Git LFS kurup `git lfs install` çalıştırın.
+3. Repo’yu clone edip Unity Hub’da açın ve importun bitmesini bekleyin.
+4. Üretilen dosyalar eksikse `MergeStudio > Ensure Project Setup` çalıştırın.
+5. `Assets/Scenes/Init.unity` açıp `Init → MainMenu → Game` akışını kontrol edin.
+
+### Doğrulama ve çalışma kuralları
+
+`python Tools/validate_repo.py` statik kontrolünü çalıştırın. Unity Editor kuruluysa `powershell -ExecutionPolicy Bypass -File Tools/Test-Unity.ps1` ile testleri çalıştırın. Sıfır hata gösteren XML raporu olmadan Unity testlerini geçmiş saymayın.
+
+- Entegrasyon için `develop`, özellikler için `feature/<kisa-ad>`, acil düzeltmeler için `hotfix/<kisa-ad>` kullanın.
+- Unity `.meta` dosyalarını koruyun. `Library`, `Temp`, build, credential, keystore ve secret commit etmeyin.
+- Oynanış iletişiminde event channel kullanın; sahne UI’ını core sistemlerden ayırın.
+- Kayıt kurtarma davranışını koruyun; her PR’da testleri ve sınırlamaları yazın.
+- Sürüm değişiminde `ProjectSettings/ProjectVersion.txt`, `Packages/manifest.json` ve bu dosyayı birlikte güncelleyin.
+
+### AI destekli geliştirme
+
+Codex, Claude ve diğer araçlar kod değiştirmeden önce bu dosyayı, `README.md`, `CONTRIBUTING.md`, `Docs/ARCHITECTURE.md` ve `Docs/CODING_STANDARDS.md` dosyalarını okumalıdır. Mevcut kodu incelemeli, küçük değişiklikler yapmalı, statik kontrolü çalıştırmalı ve çalıştıramadığı kontrolleri açıkça belirtmelidir.
