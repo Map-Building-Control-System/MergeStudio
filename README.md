@@ -10,6 +10,8 @@ Unity 6 ile Android ve iOS için merge-2 mobil oyun temeli. Eşya birleştirme, 
 5. `Assets/Scenes/Init.unity` açıp Play'e basın. Oyna → Eşya Üret → aynı seviyedeki iki hücreye sırayla dokun → Siparişler. İlk sipariş tek seferliktir.
 6. Test Runner üzerinden EditMode ve PlayMode testlerini çalıştırın.
 
+Ekipte Codex veya Claude kullanacak geliştiriciler önce [AGENTS.md](AGENTS.md) ve [CONTRIBUTING.md](CONTRIBUTING.md) dosyalarını okumalıdır. Windows için ilk kontrolü `powershell -ExecutionPolicy Bypass -File Tools/Bootstrap-Developer.ps1` ile çalıştırabilirsiniz.
+
 Proje adı verilmediği için MergeStudio kullanıldı. Ürün adı ve uygulama kimliklerini Project Settings > Player'da değiştirin; ilk kurulumdan sonra otomatik olarak üzerine yazılmaz. Repair komutu başlangıç ayarlarını tekrar uygular.
 
 ## UnityYAMLMerge
