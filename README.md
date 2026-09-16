@@ -1,4 +1,8 @@
+<p align="center"><img src="Brand/mergestudio-mark.svg" alt="MergeStudio" width="600"></p>
+
 # MergeStudio
+
+> A Unity 6.6 mobile merge game foundation for collaborative game development.
 
 Unity 6 ile Android ve iOS için merge-2 mobil oyun temeli. Eşya birleştirme, sipariş tamamlama, enerji ekonomisi, yerel kayıt ve olay kanalları içerir. Bu repo bir stüdyo başlangıç iskeletidir; mağazaya yayın için cihaz doğrulaması, imzalama ve servis entegrasyonu gerekir.
 
