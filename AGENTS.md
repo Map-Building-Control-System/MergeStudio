@@ -4,6 +4,8 @@
 
 MergeStudio is a Unity 6.6 mobile merge game. The required editor version is `6000.6.0f1`; Android development requires Android Build Support, SDK & NDK Tools, and OpenJDK.
 
+This repository is also the MergeStudio Games game-project template. New games should be created with GitHub's **Use this template** action or `Tools/New-GameProject.ps1`; do not fork it for a new game.
+
 ## First setup
 
 1. Install Unity Hub and Unity `6000.6.0f1` with Android Build Support, Android SDK & NDK Tools, and OpenJDK.
