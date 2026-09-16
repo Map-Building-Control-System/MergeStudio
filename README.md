@@ -53,6 +53,8 @@ Pull request açıklamasında davranış değişikliğini, çalıştırılan tes
 
 Codex, Claude ve diğer geliştirme araçları kod değiştirmeden önce [AGENTS.md](AGENTS.md), [CONTRIBUTING.md](CONTRIBUTING.md), [Docs/ARCHITECTURE.md](Docs/ARCHITECTURE.md) ve [Docs/CODING_STANDARDS.md](Docs/CODING_STANDARDS.md) dosyalarını okumalıdır.
 
+2D paketleri, sürümleri ve AI araçları için [Docs/TECHNOLOGY-BASELINE.md](Docs/TECHNOLOGY-BASELINE.md) dosyasına bakın.
+
 ## English
 
 ### Project
@@ -91,6 +93,8 @@ python Tools/validate_repo.py
 Every pull request should describe the behavior changed, validation performed, and known limitations. Do not report Unity tests or Android AAB builds as passing unless they were actually run.
 
 Codex, Claude, and other development tools must read [AGENTS.md](AGENTS.md), [CONTRIBUTING.md](CONTRIBUTING.md), [Docs/ARCHITECTURE.md](Docs/ARCHITECTURE.md), and [Docs/CODING_STANDARDS.md](Docs/CODING_STANDARDS.md) before editing.
+
+See [Docs/TECHNOLOGY-BASELINE.md](Docs/TECHNOLOGY-BASELINE.md) for the 2D package baseline, versions, and AI tooling policy.
 
 ## Repository layout / Repo yapısı
 
