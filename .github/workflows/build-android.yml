@@ -29,7 +29,7 @@ jobs:
           restore-keys: Library-${{ runner.os }}-Tests-${{ hashFiles('Packages/**', 'ProjectSettings/**') }}-
       - uses: game-ci/unity-test-runner@v4
         with:
-          cliVersion: 0.1.65
+          cliVersion: v0.1.65
           unityVersion: auto
           testMode: all
           artifactsPath: TestResults
@@ -58,7 +58,7 @@ jobs:
           restore-keys: Library-${{ runner.os }}-Android-${{ hashFiles('Packages/**', 'ProjectSettings/**') }}-
       - uses: game-ci/unity-builder@v4
         with:
-          cliVersion: 0.1.65
+          cliVersion: v0.1.65
           unityVersion: auto
           targetPlatform: Android
           buildName: MergeStudio
