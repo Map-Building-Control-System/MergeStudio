@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem.UI;
 using UnityEngine.Localization.Settings;
 using MergeStudio.Events;
 using MergeStudio.Persistence;
@@ -47,7 +48,7 @@ namespace MergeStudio.UI
                 Label("bread × tier 2 → 25 gold", 60);
                 Button("close", () => _sceneRequest.RaiseEvent("MainMenu"));
             }
-            if (FindFirstObjectByType<EventSystem>() == null) new GameObject("EventSystem", typeof(EventSystem), typeof(StandaloneInputModule));
+            if (FindAnyObjectByType<EventSystem>() == null) new GameObject("EventSystem", typeof(EventSystem), typeof(InputSystemUIInputModule));
         }
         private void OnEnable()
         {

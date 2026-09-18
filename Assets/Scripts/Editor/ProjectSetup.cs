@@ -42,6 +42,9 @@ namespace MergeStudio.Editor
             PlayerSettings.SetScriptingBackend(NamedBuildTarget.iOS, ScriptingImplementation.IL2CPP);
             PlayerSettings.Android.targetArchitectures = AndroidArchitecture.ARM64;
             EditorUserBuildSettings.buildAppBundle = true;
+            Directory.CreateDirectory("Assets/AddressableAssetsData");
+            Directory.CreateDirectory("Assets/AddressablesData");
+            AssetDatabase.Refresh();
             var settings = AddressableAssetSettingsDefaultObject.Settings;
             if (settings == null)
             {

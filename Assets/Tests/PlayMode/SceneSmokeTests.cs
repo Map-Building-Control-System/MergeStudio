@@ -19,13 +19,13 @@ namespace MergeStudio.Tests
                 yield return null;
             Assert.AreEqual("MainMenu", SceneManager.GetActiveScene().name, "Init must open MainMenu.");
             yield return null;
-            Assert.NotNull(Object.FindFirstObjectByType<StudioUIController>());
+            Assert.NotNull(Object.FindAnyObjectByType<StudioUIController>());
             yield return SceneManager.LoadSceneAsync("Game");
             for (int i = 0; i < 30; i++) yield return null;
-            var manager = Object.FindFirstObjectByType<GameManager>();
+            var manager = Object.FindAnyObjectByType<GameManager>();
             Assert.NotNull(manager);
             Assert.IsTrue(manager.enabled, "Save initialization must succeed.");
-            Assert.NotNull(Object.FindFirstObjectByType<SafeArea>());
+            Assert.NotNull(Object.FindAnyObjectByType<SafeArea>());
             LogAssert.NoUnexpectedReceived();
             yield return SceneManager.LoadSceneAsync("MainMenu");
         }
