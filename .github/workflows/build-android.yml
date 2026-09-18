@@ -27,6 +27,13 @@ jobs:
           path: Library
           key: Library-${{ runner.os }}-Tests-${{ hashFiles('Packages/**', 'ProjectSettings/**') }}-${{ github.sha }}
           restore-keys: Library-${{ runner.os }}-Tests-${{ hashFiles('Packages/**', 'ProjectSettings/**') }}-
+      - name: Check Unity license secrets
+        shell: bash
+        run: |
+          test -n "$UNITY_LICENSE" -a -n "$UNITY_EMAIL" -a -n "$UNITY_PASSWORD" || {
+            echo 'UNITY_LICENSE, UNITY_EMAIL, and UNITY_PASSWORD repository secrets are required for GameCI.'
+            exit 1
+          }
       - uses: game-ci/unity-test-runner@v4
         with:
           cliVersion: v0.1.65
@@ -56,6 +63,13 @@ jobs:
           path: Library
           key: Library-${{ runner.os }}-Android-${{ hashFiles('Packages/**', 'ProjectSettings/**') }}-${{ github.sha }}
           restore-keys: Library-${{ runner.os }}-Android-${{ hashFiles('Packages/**', 'ProjectSettings/**') }}-
+      - name: Check Unity license secrets
+        shell: bash
+        run: |
+          test -n "$UNITY_LICENSE" -a -n "$UNITY_EMAIL" -a -n "$UNITY_PASSWORD" || {
+            echo 'UNITY_LICENSE, UNITY_EMAIL, and UNITY_PASSWORD repository secrets are required for GameCI.'
+            exit 1
+          }
       - uses: game-ci/unity-builder@v4
         with:
           cliVersion: v0.1.65

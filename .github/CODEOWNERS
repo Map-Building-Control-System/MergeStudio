@@ -1,0 +1,9 @@
+# Default reviewer for every change. Add team handles as the studio grows.
+* @abdullahmutllu
+
+# Build, dependency, and policy changes need owner review.
+/.github/ @abdullahmutllu
+/Packages/ @abdullahmutllu
+/ProjectSettings/ @abdullahmutllu
+/Tools/ @abdullahmutllu
+

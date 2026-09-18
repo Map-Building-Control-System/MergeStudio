@@ -17,15 +17,18 @@ namespace MergeStudio.Editor
     [InitializeOnLoad]
     public static class ProjectSetup
     {
+        private const string SetupVersion = "2";
         static ProjectSetup() { EditorApplication.delayCall += Ensure; }
         [MenuItem("MergeStudio/Ensure Project Setup")]
         public static void Ensure()
         {
             if (EditorApplication.isCompiling || EditorApplication.isUpdating) { EditorApplication.delayCall += Ensure; return; }
-            bool firstRun = !File.Exists("Assets/Settings/SetupVersion.txt");
-            if (!firstRun) return;
+            string setupVersion = File.Exists("Assets/Settings/SetupVersion.txt")
+                ? File.ReadAllText("Assets/Settings/SetupVersion.txt").Trim()
+                : string.Empty;
+            if (setupVersion == SetupVersion) return;
             Configure();
-            File.WriteAllText("Assets/Settings/SetupVersion.txt", "1\n");
+            File.WriteAllText("Assets/Settings/SetupVersion.txt", SetupVersion + "\n");
             AssetDatabase.Refresh();
         }
         [MenuItem("MergeStudio/Repair Generated Configuration")]
@@ -41,6 +44,10 @@ namespace MergeStudio.Editor
             PlayerSettings.SetScriptingBackend(NamedBuildTarget.Android, ScriptingImplementation.IL2CPP);
             PlayerSettings.SetScriptingBackend(NamedBuildTarget.iOS, ScriptingImplementation.IL2CPP);
             PlayerSettings.Android.targetArchitectures = AndroidArchitecture.ARM64;
+            // Google Play requires API 36 for new apps and updates from
+            // 2026-08-31. Keep this explicit instead of relying on the
+            // machine's "Automatic" SDK selection.
+            PlayerSettings.Android.targetSdkVersion = AndroidSdkVersions.AndroidApiLevel36;
             EditorUserBuildSettings.buildAppBundle = true;
             Directory.CreateDirectory("Assets/AddressableAssetsData");
             Directory.CreateDirectory("Assets/AddressablesData");
@@ -48,6 +55,12 @@ namespace MergeStudio.Editor
             var settings = AddressableAssetSettingsDefaultObject.Settings;
             if (settings == null)
             {
+                // Addressables stores its project-level pointer in Unity's
+                // conventional folder even when the settings asset lives in
+                // our repository-owned folder. Create it before assigning the
+                // default object so a fresh clone does not fail on import.
+                Directory.CreateDirectory("Assets/AddressableAssetsData");
+                AssetDatabase.Refresh();
                 settings = AddressableAssetSettings.Create("Assets/AddressablesData", "AddressableAssetSettings", true, true);
                 AddressableAssetSettingsDefaultObject.Settings = settings;
             }
@@ -73,7 +86,7 @@ namespace MergeStudio.Editor
             }
             var collection = LocalizationEditorSettings.GetStringTableCollection("UI") ?? LocalizationEditorSettings.CreateStringTableCollection("UI", "Assets/Localization/Tables");
             string[] keys = { "continue", "settings", "shop", "play", "energy", "orders", "close", "spawn" };
-            string[] tr = { "Devam Et", "Ayarlar", "Mağaza", "Oyna", "Enerji", "Siparişler", "Kapat", "Eşya Üret" };
+            string[] tr = { "Devam Et", "Ayarlar", "Ma\u011faza", "Oyna", "Enerji", "Sipari\u015fler", "Kapat", "E\u015fya \u00dcret" };
             string[] en = { "Continue", "Settings", "Shop", "Play", "Energy", "Orders", "Close", "Spawn Item" };
             foreach (string code in new[] { "tr", "en" })
             {

@@ -25,10 +25,17 @@ sysinfo.txt
 crashlytics-build.properties
 Assets/AddressableAssetsData/*/BuildTarget*
 Assets/AddressablesData/*/BuildTarget*
+Assets/AddressablesData/*/addressables_content_state.bin
+Assets/AddressablesData/*/addressables_content_state.bin.meta
+Assets/AddressablesData/Android/
+Assets/AddressablesData/Android.meta
+Assets/Resources/
+Assets/Resources.meta
 Assets/StreamingAssets/aa/
 ServerData/
 artifacts/
 TestResults/
+Assets/Resources/PerformanceTestRun*.json
 *.apk
 *.aab
 *.ipa

@@ -18,6 +18,8 @@ MergeStudio is a Unity 6.6 mobile merge game and the MergeStudio Games game-proj
 
 Run `python Tools/validate_repo.py`. Run `powershell -ExecutionPolicy Bypass -File Tools/Test-Unity.ps1` only when the required Unity editor is installed. Never claim Unity tests passed without XML reports showing zero failures.
 
+For Android work, run `powershell -ExecutionPolicy Bypass -File Tools/Check-AndroidToolchain.ps1`. Read `Docs/STUDIO-READINESS-REPORT.md` before changing package, CI, release, analytics, monetization, or AI policy.
+
 - Use `develop` for integration, `feature/<short-name>` for features, and `hotfix/<short-name>` for urgent fixes.
 - Keep visible Unity `.meta` files. Do not commit `Library`, `Temp`, builds, credentials, keystores, or secrets.
 - Use event channels for gameplay communication and keep scene UI decoupled from core systems.
@@ -45,6 +47,8 @@ MergeStudio, Unity 6.6 ile geliştirilen mobil merge oyunudur ve MergeStudio Gam
 ### Doğrulama ve çalışma kuralları
 
 `python Tools/validate_repo.py` statik kontrolünü çalıştırın. Unity Editor kuruluysa `powershell -ExecutionPolicy Bypass -File Tools/Test-Unity.ps1` ile testleri çalıştırın. Sıfır hata gösteren XML raporu olmadan Unity testlerini geçmiş saymayın.
+
+Android değişikliği için `powershell -ExecutionPolicy Bypass -File Tools/Check-AndroidToolchain.ps1` çalıştırın. Paket, CI, yayın, analytics, monetizasyon veya AI politikası değişikliğinden önce `Docs/STUDIO-READINESS-REPORT.md` dosyasını okuyun.
 
 - Entegrasyon için `develop`, özellikler için `feature/<kisa-ad>`, acil düzeltmeler için `hotfix/<kisa-ad>` kullanın.
 - Unity `.meta` dosyalarını koruyun. `Library`, `Temp`, build, credential, keystore ve secret commit etmeyin.

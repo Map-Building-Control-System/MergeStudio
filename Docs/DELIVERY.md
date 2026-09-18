@@ -1,49 +1,58 @@
-> 12 Eylül 2026 güncellemesi: Hedef Unity sürümü kullanıcı isteğiyle 6000.6.0f1 olarak değiştirildi. Manifest Addressables 2.10.3, Localization 1.5.13, Test Framework 1.4.6 ve Visual Studio entegrasyonu 2.0.28 sürümlerine güncellendi. Aşağıdaki ilk teslim kaydı tarihsel durumdur.
->
-> Yeni hedefin Hub üzerinden kurulum komutu otomatik onay denetiminde “blocked by policy” ile engellendi. Unity 6.6 kurulumu, paket çözümlemesi, Console ve gerçek EditMode/PlayMode testleri henüz doğrulanmadı. GitHub push/PR ve CI AAB doğrulaması yapılmadı; ekip daveti aşamasına geçilmedi.
->
-> Son statik kontrol: 93 GUID, 46 C# dosyası, 0 repo hatası; workflow YAML okuması başarılı. Android workflow gerçek AAB varlığını, zorunlu bundle girdilerini ve ZIP bütünlüğünü denetler. Bu kontrolün CI'da çalıştığı henüz doğrulanmadı.
+# Delivery status / Teslim durumu
 
-# Teslim kontrolü
+**Snapshot / Anlık kayıt:** 2026-09-18 · `develop` · Unity `6000.6.0f1`
 
-Proje konumu: `D:\GameStudio`. Proje adı verilmediğinden **MergeStudio** kullanıldı. Yerel Git reposu `main` başlangıç dalıyla ve Git LFS hook'larıyla başlatıldı. Commit, uzak GitHub repo veya push yapılmadı.
+## Current status / Güncel durum
 
-## On bölümün durumu
+| Area / Alan | Status / Durum | Evidence / Kanıt |
+| --- | --- | --- |
+| Unity Editor | ✅ Ready / Hazır | `D:\unity\6000.6.0f1\Editor\Unity.exe` |
+| Android modules | ✅ Ready / Hazır | Build Support, SDK/NDK, OpenJDK 17, CMake |
+| Android SDK | ✅ Ready / Hazır | API 34/36, Build Tools 36, platform-tools 36 |
+| Package import | ✅ Clean / Temiz | Unity 6.6 import completed |
+| EditMode tests | ✅ 25 passed | XML report in local `TestResults/EditMode.xml` |
+| PlayMode tests | ✅ 2 passed | XML report in local `TestResults/PlayMode.xml` |
+| Static audit | ✅ 0 errors | `python Tools/validate_repo.py` |
+| GitHub template | ✅ Public | `MergeStudio-Games/MergeStudio` |
+| CI Unity tests | ⚠️ Pending secrets | Add `UNITY_LICENSE`, `UNITY_EMAIL`, `UNITY_PASSWORD` |
+| CI Android AAB | ⚠️ Not proven | Run workflow after Unity secrets are configured |
+| Store release | ⏳ Game-specific | Signing, privacy, store listing, device QA remain |
 
-| Bölüm | Teslim |
-| --- | --- |
-| Klasörler | İstenen Assets, Tests, .github, Docs klasörleri ve .gitkeep dosyaları; üç gerçek Unity sahnesi |
-| Git | Unity ignore, LFS/Smart Merge attributes, Windows/macOS kurulum komutları |
-| Ekip akışı | main/develop/feature/hotfix dokümanı; PR, bug ve feature şablonları |
-| CI | Android AAB, macOS iOS Xcode projesi, feature-only test; başarısız test build'i engeller |
-| Event Channel | Dört kanal tipi, generic listener ve Inspector için somut listener'lar, bağlı kanal asset'leri |
-| Kayıt | SaveData, JSON, AES-CBC/HMAC, yedek kurtarma, local cloud-provider adapter |
-| Addressables | Sabit paket sürümü, lease/handle wrapper, üç remote grup oluşturan gerçek Editor kurulum kodu |
-| Localization | Sabit paket sürümü, key sabitleri, tr/en ve sekiz UI metnini oluşturan Editor kurulum kodu |
-| SDK adapter'ları | Analytics ve reklam stub'ları; offline reklam ödül vermez, network açık hata döndürür |
-| Standartlar | İstenen ekip, isimlendirme, SO verisi ve test kuralları |
+## What was fixed / Yapılan düzeltmeler
 
-Addressables Settings/grup asset'leri ile Locale/String Table asset'leri **Unity ilk importunda oluşturulur**; bu makinede Unity olmadığı için henüz üretilmiş veya import edilmiş değiller. Paketler manifestte tanımlıdır; UPM indirme/çözümlemesi Unity'de gerçekleşir. Bunlar mevcut olmayan dosyalar için tamamlandı iddiası değildir; gerekli kurulum kodu repodadır.
+- Removed the invalid `com.unity.modules.inputlegacy` dependency that blocked Unity 6.6 package resolution.
+- Updated the 2D package line to `2D Animation 16.0.0`, `SpriteShape 16.0.0`, and `Tilemap Extras 9.0.0`.
+- Committed the generated `Packages/packages-lock.json` and Unity project settings after a successful import.
+- Made Addressables setup create Unity's conventional `Assets/AddressableAssetsData` pointer directory on a fresh clone.
+- Set Android target API explicitly to 36 for current Google Play submission rules.
+- Replaced deprecated object lookup APIs to keep the Console free of avoidable warnings.
+- Added repository audit workflow, CODEOWNERS, Dependabot, security policy, conduct rules, and a local Android toolchain checker.
 
-## Çalıştırılan kontroller
+## Run locally / Yerelde çalıştırma
 
-- `dotnet run --project Tools/SyntaxCheck -- D:\GameStudio`: **45 C# dosyası, 0 C# 9 sözdizimi hatası**. Unity assembly/type/API derlemesi değildir.
-- `dotnet run --project Tools/DomainCheck`: **14 davranış kontrolü geçti**. Gerçek Currency, EnergySystem, MergeBoard, SaveSystem kodu kullanıldı. CLI kayıt adaptörü System.Text.Json kullanır; Unity JsonUtility veya Android/iOS dosya sistemi doğrulaması yerine geçmez.
-- `python Tools/validate_repo.py`: **92 GUID, 0 hata**; meta varlığı, GUID benzersizliği, sahne/SO referansları, JSON ve build-test bağı kontrol edildi.
-- Üç workflow Python YAML parser ile okundu; LFS ve Unity merge attribute eşleşmeleri Git üzerinden doğrulandı.
-- Addressables 2.3.16, Localization 1.5.9 ve Test Framework 1.4.5 sürümlerinin Unity paket kayıt servisinde bulunduğu doğrulandı. Kurulumda kullanılan Localization/Addressables API imzaları paket kaynaklarından incelendi.
-- EditMode ve PlayMode test kaynakları repoda bulunur; **Unity Test Runner çalıştırılmadı**. Android AAB, iOS Xcode veya IPA build alınmadı; görsel/cihaz testleri yapılmadı.
+```powershell
+python Tools/validate_repo.py
+powershell -ExecutionPolicy Bypass -File Tools/Check-AndroidToolchain.ps1
+powershell -ExecutionPolicy Bypass -File Tools/Test-Unity.ps1
+```
 
-## Manuel tamamlanacak adımlar
+`Test-Unity.ps1` fails unless each XML report exists, has at least one test, and has zero failed or skipped tests. Do not report a test as passing without the XML evidence.
 
-1. Unity Hub'dan 6000.0.60f1 ve platform modüllerini kurun; projeyi açın, Console'u kontrol edin, otomatik kurulumun tamamlandığını doğrulayın. `Init.unity` üzerinden demo ve Test Runner testlerini çalıştırın. Oluşan Settings, Addressables, Localization ve packages-lock dosyalarını commit edin.
-2. Ürün adı, company ve Android/iOS uygulama kimliklerini ekibin gerçek değerleriyle değiştirin. İlk kurulum bu ayarları oluşturur; sonrasında Repair komutu dışında yeniden yazmaz.
-3. GitHub repo oluşturun/bağlayın; ilk commit'ten sonra develop dalını açın. Branch protection, gerekli CI kontrolleri, inceleyiciler ve LFS kotasını yapılandırın.
-4. Lisansınıza uygun GameCI aktivasyonu yapıp `UNITY_LICENSE`, `UNITY_EMAIL`, `UNITY_PASSWORD` secrets ekleyin. CI aktivasyonu Unity Cloud Build kullanmayı gerektirmez. Fork PR'ları secret alamaz.
-5. Android yayın AAB'si için upload keystore ve parolalarını repository secrets üzerinden GameCI builder signing girdilerine bağlayın. Mevcut akış geliştirme amaçlıdır.
-6. iOS için Apple Team ID, sertifika, provisioning profile ve export options ekleyin; Xcode archive/export aşamalarını yapılandırın. Mevcut iOS artifact **Xcode projesidir, IPA değildir**.
-7. RemoteLoadPath'e gerçek CDN adresi girin; sanat varlıklarını gruplara atayın ve Addressables içerik build'ini yayınlayın. PAD Fast Follow/On Demand isteniyorsa ilgili entegrasyonu ayrıca kurun.
-8. Firebase/PlayFab, Firebase Analytics/GameAnalytics ve reklam mediation SDK'larını gerçek proje bilgileri ve izin akışıyla entegre edin. Bulut çakışma politikası, sunucu doğrulaması ve güvenli anahtar saklama üretim gereksinimleridir.
-9. 1080×2400, 320×568, 390×844, 412×915 ve çentikli Android/iOS cihazlarda Safe Area, dokunma hedefleri, fontlar, kayıt/pause, çevrimdışı durum ve performansı test edin.
+## CI and release gates / CI ve yayın kapıları
 
-Bu teslim, çalışan kod ve yapılandırma üreten bir repo başlangıcıdır. Unity importu, tam derleme ve yayın doğrulamaları yapılmadan production-ready onayı verilmemiştir.
+1. Add Unity GameCI secrets in the repository or an environment. Fork pull requests do not receive secrets.
+2. Run `Build Android` on `develop` and on a dummy PR. The workflow must pass Unity tests, produce an `.aab`, and validate `BundleConfig.pb` plus `base/manifest/AndroidManifest.xml`.
+3. Generate an Android upload keystore outside Git. Store it safely and add its four GameCI secrets only when the game has a real package identifier.
+4. Protect `main` and `develop`; require the repository audit, Unity tests, and one review before merge.
+5. For every new game created from this template, replace company/product identifiers, content, package name, analytics policy, privacy links, signing configuration, and release metadata.
+
+See [STUDIO-READINESS-REPORT.md](STUDIO-READINESS-REPORT.md) for the full bilingual technology, product, marketing, AI, and production-gap audit.
+
+## English note
+
+This repository is a reusable Unity 6.6 foundation and template. A green local test run proves the checked-in foundation; it does not prove a future game's content, device performance, privacy compliance, signed store build, or monetization.
+
+## Türkçe not
+
+Bu repo yeniden kullanılabilir Unity 6.6 temelidir ve şablondur. Yerel testlerin geçmesi, commit edilmiş temelin çalıştığını gösterir; yeni oyunun içeriğinin, cihaz performansının, privacy uyumunun, imzalı mağaza derlemesinin veya monetizasyonunun hazır olduğunu göstermez.
+

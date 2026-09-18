@@ -55,6 +55,8 @@ Codex, Claude ve diğer geliştirme araçları kod değiştirmeden önce [AGENTS
 
 2D paketleri, sürümleri ve AI araçları için [Docs/TECHNOLOGY-BASELINE.md](Docs/TECHNOLOGY-BASELINE.md) dosyasına bakın.
 
+Güncel test, Android toolchain, CI, ürün, pazarlama ve yayın eksiklerinin kaynaklı denetimi için [Docs/STUDIO-READINESS-REPORT.md](Docs/STUDIO-READINESS-REPORT.md) ve [Docs/DELIVERY.md](Docs/DELIVERY.md) dosyalarını okuyun.
+
 ## English
 
 ### Project
@@ -95,6 +97,8 @@ Every pull request should describe the behavior changed, validation performed, a
 Codex, Claude, and other development tools must read [AGENTS.md](AGENTS.md), [CONTRIBUTING.md](CONTRIBUTING.md), [Docs/ARCHITECTURE.md](Docs/ARCHITECTURE.md), and [Docs/CODING_STANDARDS.md](Docs/CODING_STANDARDS.md) before editing.
 
 See [Docs/TECHNOLOGY-BASELINE.md](Docs/TECHNOLOGY-BASELINE.md) for the 2D package baseline, versions, and AI tooling policy.
+
+See [Docs/STUDIO-READINESS-REPORT.md](Docs/STUDIO-READINESS-REPORT.md) and [Docs/DELIVERY.md](Docs/DELIVERY.md) for the dated readiness evidence, CI gates, product, marketing, and release gaps.
 
 ## Repository layout / Repo yapısı
 
