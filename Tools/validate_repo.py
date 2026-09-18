@@ -16,8 +16,12 @@ for p in assets.rglob('*.meta'):
     if m[1] in guids: errors.append(f'Duplicate GUID: {p}')
     guids[m[1]]=p
 for p in list(assets.rglob('*.unity'))+list(assets.rglob('*.asset')):
-    for guid in re.findall(r'guid: ([0-9a-f]{32})',p.read_text()):
-        if guid not in guids: errors.append(f'Unresolved GUID {guid}: {p}')
+    text=p.read_text()
+    references=re.findall(r'guid: ([0-9a-f]{32}), type: (\d+)',text)
+    for guid,reference_type in references:
+        # Package MonoScripts live outside Assets and therefore have no local .meta file.
+        if guid not in guids and reference_type != '3':
+            errors.append(f'Unresolved GUID {guid}: {p}')
 for p in list(root.glob('Packages/*.json'))+list(assets.rglob('*.asmdef')): json.loads(p.read_text())
 for name in ['Init','MainMenu','Game']:
     if not (assets/'Scenes'/f'{name}.unity').is_file(): errors.append(f'Missing scene {name}')
